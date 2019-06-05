@@ -8,14 +8,6 @@ Added click on photo function
 
 Added photo zoom
 
-## -----version 0.21 ------
-Version review :
-
-Added click on photo function
-
-Added photo zoom
----
-
 ## -----version 0.2 ------
 
 Version review :
