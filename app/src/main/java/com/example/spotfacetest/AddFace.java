@@ -17,7 +17,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.UUID;
 
 public class AddFace extends AsyncTask<String,Void,String> {
     private FaceServiceClient faceServiceClient;
@@ -30,7 +29,6 @@ public class AddFace extends AsyncTask<String,Void,String> {
     private StorageReference mStorageRef;
     public AsyncResponse delegate = null;
     private String group;
-
 
     public AddFace(FirebaseUser fUser, FaceServiceClient faceServiceClient, Bitmap bmp, String userName ){
         this.bmp = bmp;
@@ -47,7 +45,7 @@ public class AddFace extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... strings)  {
 
         try {
-            CreatePersonResult result = faceServiceClient.createPersonInLargePersonGroup(group, fUser.getPhoneNumber().toString().replace("+",""), userName);
+            CreatePersonResult result = faceServiceClient.createPersonInLargePersonGroup(group, fUser.getPhoneNumber().replace("+",""), userName);
             FaceRectangle face = new FaceRectangle();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);

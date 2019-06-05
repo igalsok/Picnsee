@@ -1,7 +1,5 @@
 package com.example.spotfacetest;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,12 +13,7 @@ import com.squareup.picasso.Picasso;
 
 public class NoteAdapter extends FirestoreRecyclerAdapter<Note, NoteAdapter.NoteHolder> {
 
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+
 
     public NoteAdapter(@NonNull FirestoreRecyclerOptions<Note> options) {
         super(options);

@@ -15,8 +15,7 @@ public class HomeActivity extends AppCompatActivity {
         {
             this.getSupportActionBar().hide();
         }
-
-        catch (NullPointerException e){}
+        catch (NullPointerException ignored){ignored.printStackTrace();}
         setContentView(R.layout.activity_home);
         new Handler().postDelayed(new Runnable() {
             @Override

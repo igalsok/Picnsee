@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -19,25 +18,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.microsoft.projectoxford.face.*;
-import com.microsoft.projectoxford.face.contract.*;
 import com.microsoft.projectoxford.face.rest.ClientException;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class RegActivity extends AppCompatActivity implements AsyncResponse  {
@@ -75,7 +68,7 @@ public class RegActivity extends AppCompatActivity implements AsyncResponse  {
         {
             this.getSupportActionBar().hide();
         }
-        catch (NullPointerException e){}
+        catch (NullPointerException ignored){}
         setContentView(R.layout.activity_reg);
         storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReferenceFromUrl("gs://spotfacetest.appspot.com");
@@ -105,14 +98,9 @@ public class RegActivity extends AppCompatActivity implements AsyncResponse  {
                     addPersonToGroup();
                     uploadPhoto(bmp);
                 }
-                catch(IOException exe)
-                {
-
-                }
-                catch (ClientException exe)
-                {
-
-                }
+               catch (Exception e){
+                    e.printStackTrace();
+               }
 
 
             }
@@ -182,14 +170,13 @@ public class RegActivity extends AppCompatActivity implements AsyncResponse  {
         if (resultCode == RESULT_OK) {
             super.onActivityResult(requestCode, resultCode, data);
             try {
-                if (resultCode == RESULT_OK) {
                     File file = new File(mCurrentPhotoPath);
                     Bitmap bitmapTmp = MediaStore.Images.Media
                             .getBitmap(RegActivity.this.getContentResolver(), Uri.fromFile(file));
                     ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                     int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                             ExifInterface.ORIENTATION_UNDEFINED);
-                    Bitmap rotatedBitmap = null;
+                    Bitmap rotatedBitmap;
                     switch(orientation) {
                         case ExifInterface.ORIENTATION_ROTATE_90:
                             rotatedBitmap = rotateImage(bitmapTmp, 90);
@@ -206,10 +193,9 @@ public class RegActivity extends AppCompatActivity implements AsyncResponse  {
                         case ExifInterface.ORIENTATION_NORMAL:
                         default:
                             rotatedBitmap = bitmapTmp;
-                    }
-            bmp = rotatedBitmap;
-            this.imgView_selfie.setImageBitmap(rotatedBitmap);
                 }
+                bmp = rotatedBitmap;
+                this.imgView_selfie.setImageBitmap(rotatedBitmap);
 
             } catch (Exception error) {
                 error.printStackTrace();
@@ -225,7 +211,7 @@ public class RegActivity extends AppCompatActivity implements AsyncResponse  {
                 matrix, true);
     }
 
-   private void addPersonToGroup() throws IOException,ClientException{
+   private void addPersonToGroup() {
 
     addFace = new AddFace(fUser,faceServiceClient,bmp,plnTxt_username.getText().toString());
     addFace.delegate = this;
@@ -234,15 +220,9 @@ public class RegActivity extends AppCompatActivity implements AsyncResponse  {
 
 
     @Override
-    public void processFinish(ArrayList<Photo> output) {
-
-    }
-
-    @Override
     public void proccesAddFinish(String string) {
         Intent newIntent = new Intent(RegActivity.this, MainActivity.class);
         startActivity(newIntent);
         finish();
-
     }
 }

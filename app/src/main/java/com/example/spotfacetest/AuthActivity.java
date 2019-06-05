@@ -2,10 +2,8 @@ package com.example.spotfacetest;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -48,15 +45,15 @@ public class AuthActivity extends AppCompatActivity {
         {
             this.getSupportActionBar().hide();
         }
-        catch (NullPointerException e){}
+        catch (NullPointerException e){e.printStackTrace();}
         setContentView(R.layout.activity_auth);
         db = FirebaseFirestore.getInstance();
-        enterPhone = (EditText) findViewById(R.id.plnTxt_enterPhone);
+        enterPhone = findViewById(R.id.plnTxt_enterPhone);
         mAuth = FirebaseAuth.getInstance();
-        sendSms = (Button) findViewById(R.id.btn_sndSms);
-        enterCode = (EditText) findViewById(R.id.plnTxt_enterCode);
-        error = (TextView) findViewById(R.id.txt_error);
-        verify = (Button) findViewById(R.id.btn_verify);
+        sendSms = findViewById(R.id.btn_sndSms);
+        enterCode = findViewById(R.id.plnTxt_enterCode);
+        error = findViewById(R.id.txt_error);
+        verify = findViewById(R.id.btn_verify);
         sendSms.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

@@ -1,23 +1,15 @@
 package com.example.spotfacetest;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.media.ExifInterface;
-import android.media.FaceDetector;
-import android.media.Image;
+import android.support.media.ExifInterface;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,47 +17,23 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements QueryResponse {
@@ -87,20 +55,15 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build();
-        firestore.setFirestoreSettings(settings);
-
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser currentUser = mAuth.getCurrentUser();
         setContentView(R.layout.activity_main);
-        btn_logout = (Button) findViewById(R.id.btn_logout);
+        btn_logout = findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
             }
         });
 
-        btn_cam = (ImageButton) findViewById(R.id.btn_cam);
+        btn_cam = findViewById(R.id.btn_cam);
         btn_cam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,14 +102,16 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
         this.recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new SampleRecycler());
-        Gallery gal = new Gallery(mAuth.getCurrentUser().getPhoneNumber());
-        gal.delegate = this;
-        gal.execute();
+        if(mAuth.getCurrentUser() != null) {
+            Gallery gal = new Gallery(mAuth.getCurrentUser().getPhoneNumber());
+            gal.delegate = this;
+            gal.execute();
+        }
     }
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp =  new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
@@ -222,24 +187,7 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
         adp.startListening();
     }
 
-    public class myThread2 extends Thread {
-        private SwipeRefreshLayout refresh;
 
-        public myThread2(SwipeRefreshLayout refresh){
-            this.refresh = refresh;
-        }
-
-        @Override
-        public void run() {
-            try {
-                myThread2.this.sleep(2000);
-            }
-            catch (Exception e){
-
-            }
-            refresh.setRefreshing(false);
-        }
-    }
 
     public class myThread extends Thread {
         private String phoneNumber;
@@ -257,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
                 ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                 int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                         ExifInterface.ORIENTATION_UNDEFINED);
-                Bitmap rotatedBitmap = null;
+                Bitmap rotatedBitmap;
                 switch (orientation) {
                     case ExifInterface.ORIENTATION_ROTATE_90:
                         rotatedBitmap = rotateImage(bitmapTmp, 90);

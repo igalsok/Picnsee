@@ -1,10 +1,6 @@
 package com.example.spotfacetest;
 
-import android.net.Uri;
-
 import com.google.firebase.Timestamp;
-
-import java.util.UUID;
 
 public class UserPhoto {
     public String faceId;

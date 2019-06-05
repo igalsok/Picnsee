@@ -1,13 +1,8 @@
 package com.example.spotfacetest;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,8 +38,10 @@ public class Gallery extends AsyncTask<String,Void,Query> {
                         user = doc.toObject(User.class);
                     }
                     try {
-                        Query query = db.collection("UserPhotos").whereEqualTo("faceId", user.faceId).orderBy("time", Query.Direction.DESCENDING);
-                        setQuery(query);
+                        if(user!=null) {
+                            Query query = db.collection("UserPhotos").whereEqualTo("faceId", user.faceId).orderBy("time", Query.Direction.DESCENDING);
+                            setQuery(query);
+                        }
 
 
                     } catch (Exception exe) {

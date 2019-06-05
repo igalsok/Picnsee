@@ -1,40 +1,21 @@
 package com.example.spotfacetest;
 
 import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
-import com.microsoft.projectoxford.face.contract.Candidate;
-import com.microsoft.projectoxford.face.contract.CreatePersonResult;
-import com.microsoft.projectoxford.face.contract.Face;
-import com.microsoft.projectoxford.face.contract.FaceRectangle;
-import com.microsoft.projectoxford.face.contract.IdentifyResult;
-import com.microsoft.projectoxford.face.rest.ClientException;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 
 public class FaceRecognition extends AsyncTask<String, Void, Void> {
@@ -51,7 +32,6 @@ public class FaceRecognition extends AsyncTask<String, Void, Void> {
             new FaceServiceRestClient(apiEndpoint, subscriptionKey);
 
     private Bitmap bmp;
-    private FirebaseFirestore db;
     private FirebaseStorage storage;
     private StorageReference mStorageRef;
     private String phoneNumber;
@@ -64,14 +44,12 @@ public class FaceRecognition extends AsyncTask<String, Void, Void> {
 
 
     public FaceRecognition(String phoneNumber, Bitmap bmp, Bitmap thumbnail) {
-        db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReferenceFromUrl("gs://spotfacetest.appspot.com");
         this.phoneNumber = phoneNumber;
         this.group = "users_new";
         this.bmp = bmp.copy(bmp.getConfig(), true);
         this.thumbnail = thumbnail.copy(thumbnail.getConfig(), true);
-        ;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
