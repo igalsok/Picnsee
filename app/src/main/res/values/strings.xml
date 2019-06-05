@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SpotFaceTest</string>
+    <string name="SpotFace">SpotFace</string>
+    <string name="enterPhone">Enter your phone number</string>
+    <string name="sendSms">Send SMS</string>
+    <string name="verify">verify</string>
+    <string name="enter_code">Enter code</string>
+    <string name="enterSMSHint">Enter SMS code</string>
+    <string name="wrongCode">Wrong code</string>
+    <string name="logout">Log out</string>
+    <string name="Welcome">Welcome to Picnsee!</string>
+    <string name="UserName">Username</string>
+    <string name="TakeSelfie">Take a selfie</string>
+    <string name="Upload">Browse</string>
+    <string name="Proceed">proceed</string>
+    <string name="PhotoUploading">Photo is uploading</string>
+    <string name="PhotoUploaded">Photo uploaded successfuly</string>
+</resources>

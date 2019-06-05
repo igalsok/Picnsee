@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AuthActivity">
+
+    <EditText
+        android:id="@+id/plnTxt_enterPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="66dp"
+        android:ems="10"
+        android:hint="@string/enterPhone"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/plnTxt_enterCode"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sndSms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_sndSms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:text="@string/sendSms"
+        app:layout_constraintBaseline_toBaselineOf="@+id/plnTxt_enterPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/plnTxt_enterPhone" />
+
+    <EditText
+        android:id="@+id/plnTxt_enterCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginRight="74dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="@string/enterSMSHint"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/btn_verify"
+        app:layout_constraintEnd_toEndOf="@+id/btn_sndSms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plnTxt_enterPhone" />
+
+    <Button
+        android:id="@+id/btn_verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:text="@string/verify"
+        app:layout_constraintBottom_toTopOf="@+id/txt_error"
+        app:layout_constraintEnd_toEndOf="@+id/plnTxt_enterCode"
+        app:layout_constraintStart_toStartOf="@+id/plnTxt_enterCode"
+        app:layout_constraintTop_toBottomOf="@+id/plnTxt_enterCode" />
+
+    <TextView
+        android:id="@+id/txt_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="324dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_verify"
+        app:layout_constraintStart_toStartOf="@+id/btn_verify"
+        app:layout_constraintTop_toBottomOf="@+id/btn_verify" />
+</android.support.constraint.ConstraintLayout>
