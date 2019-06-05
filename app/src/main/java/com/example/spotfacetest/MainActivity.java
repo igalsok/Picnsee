@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,7 +37,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class MainActivity extends AppCompatActivity implements QueryResponse {
+public class MainActivity extends AppCompatActivity implements QueryResponse,FinishResponse {
     private static final int REQUEST_TAKE_PHOTO = 1;
     private Button btn_logout;
     private ImageButton btn_cam;
@@ -81,10 +82,6 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
                 dispatchTakePictureIntent();
             }
         });
-
-
-
-
         if (currentUser != null) {
 
         } else {
@@ -179,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
         FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
                 .setQuery(output, Note.class)
                 .build();
-        NoteAdapter adp = new NoteAdapter(options);
+        NoteAdapter adp = new NoteAdapter(options, this);
         RecyclerView rView = recyclerView;
         rView.setHasFixedSize(true);
         rView.setLayoutManager(new GridLayoutManager(this,3));
@@ -187,6 +184,10 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
         adp.startListening();
     }
 
+    @Override
+    public void processFinish(boolean output) {
+        Toast.makeText(this, "Photo uploaded Successfully", Toast.LENGTH_SHORT).show();
+    }
 
 
     public class myThread extends Thread {
@@ -223,7 +224,9 @@ public class MainActivity extends AppCompatActivity implements QueryResponse {
                         rotatedBitmap = bitmapTmp;
                 }
                 Bitmap thumbnail = rotatedBitmap.copy(rotatedBitmap.getConfig(), true);
+
                 FaceRecognition reco = new FaceRecognition(phoneNumber, rotatedBitmap, ThumbnailUtils.extractThumbnail(thumbnail, 300, 300));
+                reco.delegate = MainActivity.this;
                 reco.execute();
             } catch (Exception error) {
                 error.printStackTrace();

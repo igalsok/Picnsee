@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +42,7 @@ public class FaceRecognition extends AsyncTask<String, Void, Void> {
     private Bitmap thumbnail;
     private Uri photoUri = null;
     private Uri thumbNailUri = null;
+    public FinishResponse delegate = null;
 
 
     public FaceRecognition(String phoneNumber, Bitmap bmp, Bitmap thumbnail) {
@@ -121,8 +123,9 @@ public class FaceRecognition extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void vo) {
 
-        FaceReco reco = new FaceReco(phoneNumber, data1, photoId, photoUri,thumbNailUri);
-        reco.start();
+        FaceReco reco = new FaceReco(phoneNumber, data1, photoId, photoUri,thumbNailUri, delegate);
+        reco.execute();
+
     }
 
 }
