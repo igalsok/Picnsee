@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,7 +25,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.microsoft.projectoxford.face.*;
-import com.microsoft.projectoxford.face.rest.ClientException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

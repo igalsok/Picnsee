@@ -15,10 +15,47 @@
       },
       "oauth_client": [
         {
-          "client_id": "146136467245-qq0pgmpd1irslsvd52iu251sr6k3s6k6.apps.googleusercontent.com",
+          "client_id": "146136467245-s326s5q78js86maesn6dfja49u2dm7sf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.spotfacetest",
+            "certificate_hash": "faeed4e13ad1a0f5c1e6e16d51eb071f5382ea64"
+          }
+        },
+        {
+          "client_id": "146136467245-1v9dsl39bu3bgaie19gfrat8b0cs6uro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOg4dXYXaodFv24jVpRJtZNfHspr_JH0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146136467245-1v9dsl39bu3bgaie19gfrat8b0cs6uro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146136467245:android:aca71accc512b1c0",
+        "android_client_info": {
+          "package_name": "com.igaltech.Picnsee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146136467245-bu6c28qimpi7pe34o3f4bsb3rnhpl8ka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.igaltech.Picnsee",
             "certificate_hash": "faeed4e13ad1a0f5c1e6e16d51eb071f5382ea64"
           }
         },

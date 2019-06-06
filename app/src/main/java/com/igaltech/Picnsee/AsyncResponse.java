@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 public interface AsyncResponse {
     void proccesAddFinish(String string);

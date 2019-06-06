@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

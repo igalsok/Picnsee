@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

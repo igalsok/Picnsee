@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.spotfacetest">
+    package="com.igaltech.Picnsee">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,14 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"> <intent-filter>
+        <activity android:name="com.igaltech.Picnsee.HomeActivity"> <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
-        <activity android:name=".RegActivity" />
-        <activity android:name=".AuthActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.igaltech.Picnsee.RegActivity" />
+        <activity android:name="com.igaltech.Picnsee.AuthActivity" />
+        <activity android:name="com.igaltech.Picnsee.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -34,7 +34,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.spotfacetest.fileprovider"
+            android:authorities="com.igaltech.Picnsee.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

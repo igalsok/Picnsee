@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import com.google.firebase.Timestamp;
 

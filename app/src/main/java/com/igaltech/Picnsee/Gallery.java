@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;

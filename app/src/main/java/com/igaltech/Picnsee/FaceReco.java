@@ -1,4 +1,4 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import android.net.Uri;
 import android.os.AsyncTask;

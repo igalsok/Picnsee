@@ -1,7 +1,6 @@
-package com.example.spotfacetest;
+package com.igaltech.Picnsee;
 
 import android.app.AlertDialog;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +14,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.squareup.picasso.Picasso;
-
-import static android.app.AlertDialog.*;
 
 public class NoteAdapter extends FirestoreRecyclerAdapter<Note, NoteAdapter.NoteHolder> {
 
